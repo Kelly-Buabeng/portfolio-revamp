@@ -9,7 +9,7 @@ const projects = [
     name: 'Exoplanet Classification ML Model',
     description:
       'Machine learning model using NASA datasets to identify and classify exoplanets with advanced data processing techniques.',
-    link: { href: '#', label: 'Repository coming soon' },
+    link: { href: 'https://github.com/Kelly-Buabeng/NASA-SpaceApps-Hack-ml-exoplanets-Backend-Optimisation', label: 'github.com' },
   },
   {
     name: 'Expert System - Illegal Mining',

@@ -7,11 +7,11 @@ import {
   GitHubIcon,
   LinkedInIcon,
 } from '@/components/SocialIcons'
-import image1 from '@/images/photos/image-1.jpg'
-import image2 from '@/images/photos/image-2.jpg'
-import image3 from '@/images/photos/image-3.jpg'
-import image4 from '@/images/photos/image-4.jpg'
-import image5 from '@/images/photos/image-5.jpg'
+import image1 from '@/images/photos/IMG_1252.jpg'
+import image2 from '@/images/photos/IMG_4933.jpeg'
+import image3 from '@/images/photos/NASA Space Apps Challenge_page-0001.jpg'
+import image4 from '@/images/photos/IMG_4076.jpeg'
+import image5 from '@/images/photos/IMG_4078.jpeg'
 
 function WrenchScrewdriverIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -104,7 +104,7 @@ function Resume() {
       title: 'System Administrator / IT Personnel',
       logo: null,
       start: 'March 2024',
-      end: 'May 2024',
+      end: 'June 2024',
     },
     {
       company: 'Zormor',
@@ -116,16 +116,16 @@ function Resume() {
   ]
 
   return (
-    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+    <div className="rounded-3xl border border-zinc-100 p-6 dark:border-zinc-700/40 bg-gradient-to-br from-zinc-50 to-white dark:from-zinc-800/50 dark:to-zinc-900/50">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <BriefcaseIcon className="h-6 w-6 flex-none" />
+        <BriefcaseIcon className="h-6 w-6 flex-none text-teal-500 dark:text-teal-400" />
         <span className="ml-3">Work Experience</span>
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
-          <li key={roleIndex} className="flex gap-4">
-            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <div className="h-7 w-7 bg-zinc-500 rounded-full flex items-center justify-center">
+          <li key={roleIndex} className="flex gap-4 group">
+            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 group-hover:ring-teal-500/20 transition-all">
+              <div className="h-7 w-7 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center">
                 <span className="text-white text-xs font-bold">{role.company.charAt(0)}</span>
               </div>
             </div>
@@ -153,11 +153,11 @@ function Resume() {
       </ol>
       <Link
         href="/kelly@cv.pdf"
-        className="group mt-6 w-full inline-flex items-center justify-center gap-2 rounded-md bg-zinc-50 px-3 py-2 text-sm outline-offset-2 transition hover:bg-zinc-100 active:bg-zinc-100 active:text-zinc-900/60 dark:bg-zinc-800/50 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:active:bg-zinc-800/50 dark:active:text-zinc-50/70"
+        className="group mt-6 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-teal-500 px-3 py-2 text-sm font-medium text-white outline-offset-2 transition hover:bg-teal-600 active:bg-teal-600 shadow-sm hover:shadow-md"
         target="_blank"
       >
         Download CV
-        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+        <ArrowDownIcon className="h-4 w-4 stroke-white transition" />
       </Link>
     </div>
   )
@@ -168,8 +168,8 @@ function Projects() {
     {
       name: 'Exoplanet Classification ML Model',
       description: 'Machine learning model using NASA datasets to identify and classify exoplanets with advanced data processing techniques',
-      link: { href: '#', label: 'Coming Soon' },
-      tech: 'Python, TensorFlow, NASA Data, ML',
+      link: { href: 'https://github.com/Kelly-Buabeng/NASA-SpaceApps-Hack-ml-exoplanets-Backend-Optimisation', label: 'github.com' },
+      tech: 'FastAPI, Jupyter Notebook, NASA Kepler Dataset, ML',
     },
     {
       name: 'Expert System - Illegal Mining',
@@ -192,16 +192,16 @@ function Projects() {
   ]
 
   return (
-    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+    <div className="rounded-3xl border border-zinc-100 p-6 dark:border-zinc-700/40 bg-gradient-to-br from-zinc-50 to-white dark:from-zinc-800/50 dark:to-zinc-900/50">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <WrenchScrewdriverIcon className="h-6 w-6 flex-none" />
+        <WrenchScrewdriverIcon className="h-6 w-6 flex-none text-teal-500 dark:text-teal-400" />
         <span className="ml-3">Recent Projects</span>
       </h2>
       <ol className="mt-6 space-y-4">
         {projects.map((project, projectIndex) => (
-          <li className="flex gap-4" key={projectIndex}>
-            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <div className="h-7 w-7 bg-teal-500 rounded-full flex items-center justify-center">
+          <li className="flex gap-4 group" key={projectIndex}>
+            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 group-hover:ring-teal-500/20 transition-all">
+              <div className="h-7 w-7 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center">
                 <span className="text-white text-xs font-bold">{project.name.charAt(0)}</span>
               </div>
             </div>
@@ -237,12 +237,12 @@ function Projects() {
       </ol>
       <Link 
         href="https://github.com/Kelly-Buabeng?tab=repositories"
-        className="group mt-6 w-full inline-flex items-center justify-center gap-2 rounded-md bg-zinc-50 px-3 py-2 text-sm outline-offset-2 transition hover:bg-zinc-100 active:bg-zinc-100 active:text-zinc-900/60 dark:bg-zinc-800/50 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:active:bg-zinc-800/50 dark:active:text-zinc-50/70"
+        className="group mt-6 w-full inline-flex items-center justify-center gap-2 rounded-xl border border-teal-500/20 px-3 py-2 text-sm font-medium text-teal-600 dark:text-teal-400 outline-offset-2 transition hover:bg-teal-500/10 hover:border-teal-500/30 shadow-sm"
         target="_blank"
         rel="noopener noreferrer"
       >
         View All Projects
-        <ArrowOutIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+        <ArrowOutIcon className="h-4 w-4 stroke-teal-600 dark:stroke-teal-400 transition" />
       </Link>
     </div>
   )
@@ -258,7 +258,10 @@ function Photos() {
           <div
             key={image.src}
             className={clsx(
-              'relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800',
+              'relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-2xl bg-zinc-100 sm:w-72 sm:rounded-3xl dark:bg-zinc-800',
+              'ring-2 ring-teal-500/10 dark:ring-teal-400/10',
+              'hover:ring-teal-500/30 dark:hover:ring-teal-400/30 transition-all duration-300',
+              'hover:scale-105',
               rotations[imageIndex % rotations.length],
             )}
           >
@@ -269,7 +272,7 @@ function Photos() {
               className={
                 clsx(
                   "absolute inset-0 h-full w-full object-cover",
-                  image === image4 && "object-top"
+                  image === image4 && "object-center"
                 )
               }
             />
@@ -285,10 +288,10 @@ export default function Home() {
     <>
       <Container className="mt-9">
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100 bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-zinc-100 dark:to-zinc-400 bg-clip-text text-transparent">
             Computer Science Student, Backend Developer, and Cloud Enthusiast
           </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
             I'm Kelly, a Computer Science student in Accra, Ghana, passionate about backend development and cloud computing. I love building scalable solutions and exploring how technology can make complex processes more accessible to everyday users.
           </p>
           <div className="mt-6 flex gap-6">
