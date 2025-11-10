@@ -93,6 +93,13 @@ function SocialLink({
 function Resume() {
   let resume = [
     {
+      company: 'Ghana Civil Aviation Authority',
+      title: 'IT/Cybersecurity Intern',
+      logo: null,
+      start: 'November 2025',
+      end: 'Present',
+    },
+    {
       company: 'Zavs Labs',
       title: 'Software Engineering Full Stack Intern',
       logo: null,
@@ -101,7 +108,7 @@ function Resume() {
     },
     {
       company: 'Total Energies Ghana',
-      title: 'System Administrator / IT Personnel',
+      title: 'System Administrator / IT Intern',
       logo: null,
       start: 'March 2024',
       end: 'June 2024',
