@@ -4,6 +4,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
+import { FadeIn } from '@/components/FadeIn'
 import {
   GitHubIcon,
   InstagramIcon,
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <Container className="mt-16 sm:mt-32">
-      <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
+      <FadeIn className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
         <div className="lg:pl-20">
           <div className="max-w-sm px-2.5 lg:max-w-none">
             <Image
@@ -100,7 +101,7 @@ export default function About() {
             </SocialLink>
           </ul>
         </div>
-      </div>
+      </FadeIn>
     </Container>
   )
 }

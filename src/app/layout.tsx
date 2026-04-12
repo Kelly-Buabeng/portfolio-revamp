@@ -2,6 +2,7 @@ import { type Metadata } from 'next'
 
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
+import { AnimatedBackground } from '@/components/AnimatedBackground'
 
 import '@/styles/tailwind.css'
 
@@ -20,9 +21,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
-      <body className="flex h-full bg-zinc-50 dark:bg-black">
+    <html lang="en" className="h-full antialiased font-sans" suppressHydrationWarning>
+      <body className="flex h-full bg-transparent">
         <Providers>
+          <AnimatedBackground />
           <div className="flex w-full">
             <Layout>{children}</Layout>
           </div>
