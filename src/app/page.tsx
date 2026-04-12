@@ -7,7 +7,7 @@ import {
   GitHubIcon,
   LinkedInIcon,
 } from '@/components/SocialIcons'
-import image1 from '@/images/photos/IMG_1252.jpg'
+import image1 from '@/images/photos/IMG_1252.jpeg'
 import image2 from '@/images/photos/IMG_4933.jpeg'
 import image3 from '@/images/photos/NASA Space Apps Challenge_page-0001.jpg'
 import image4 from '@/images/photos/IMG_4076.jpeg'
