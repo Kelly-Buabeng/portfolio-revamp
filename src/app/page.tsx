@@ -1,331 +1,292 @@
 import Image from 'next/image'
-import Link from 'next/link'
-import clsx from 'clsx'
 
+import { ContactPanel } from '@/components/ContactPanel'
 import { Container } from '@/components/Container'
+import { ArrowRightIcon, DownloadIcon, GitHubIcon, LinkedInIcon, PinIcon } from '@/components/Icons'
+import { ProjectCard } from '@/components/ProjectCard'
+import { Button } from '@/components/ui/Button'
+import { SectionHeading } from '@/components/ui/SectionHeading'
+import { Tag } from '@/components/ui/Tag'
 import {
-  GitHubIcon,
-  LinkedInIcon,
-} from '@/components/SocialIcons'
-import image1 from '@/images/photos/IMG_1252.jpeg'
-import image2 from '@/images/photos/IMG_4933.jpeg'
-import image3 from '@/images/photos/NASA Space Apps Challenge_page-0001.jpg'
-import image4 from '@/images/photos/IMG_4076.jpeg'
-import image5 from '@/images/photos/IMG_4078.jpeg'
+  achievements,
+  certifications,
+  education,
+  experience,
+  highlights,
+  profile,
+  projects,
+  skills,
+} from '@/lib/data'
+import nasaCertificate from '@/images/nasa-certificate.jpg'
+import portrait from '@/images/portrait.jpg'
 
-function WrenchScrewdriverIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+function Hero() {
   return (
-    <svg 
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path 
-        d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" 
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
+    <section className="relative overflow-hidden">
+      <div
+        className="dot-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]"
+        aria-hidden="true"
       />
-    </svg>
-  )
-}
-
-function ArrowOutIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path 
-        d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-        strokeWidth="1.5"
-        strokeLinecap="round" 
-        strokeLinejoin="round" 
-      />
-    </svg>
-  )
-}
-
-function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H6.911a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
-
-function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="m4.75 8.75 3.25 3.25 3.25-3.25"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
-function SocialLink({
-  icon: Icon,
-  ...props
-}: React.ComponentPropsWithoutRef<typeof Link> & {
-  icon: React.ComponentType<{ className?: string }>
-}) {
-  return (
-    <Link className="group -m-1 p-1" {...props}>
-      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
-    </Link>
-  )
-}
-
-function Resume() {
-  let resume = [
-    {
-      company: 'Ghana Civil Aviation Authority',
-      title: 'IT/Cybersecurity Intern',
-      logo: null,
-      start: 'November 2025',
-      end: 'Present',
-    },
-    {
-      company: 'Zavs Labs',
-      title: 'Software Engineering Full Stack Intern',
-      logo: null,
-      start: 'September 2025',
-      end: 'Present',
-    },
-    {
-      company: 'Total Energies Ghana',
-      title: 'System Administrator / IT Intern',
-      logo: null,
-      start: 'March 2024',
-      end: 'June 2024',
-    },
-    {
-      company: 'Zormor',
-      title: 'Software Engineering Intern and Researcher',
-      logo: null,
-      start: 'November 2023',
-      end: 'March 2024',
-    },
-  ]
-
-  return (
-    <div className="rounded-3xl border border-zinc-100 p-6 dark:border-zinc-700/40 bg-gradient-to-br from-zinc-50 to-white dark:from-zinc-800/50 dark:to-zinc-900/50">
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <BriefcaseIcon className="h-6 w-6 flex-none text-teal-500 dark:text-teal-400" />
-        <span className="ml-3">Work Experience</span>
-      </h2>
-      <ol className="mt-6 space-y-4">
-        {resume.map((role, roleIndex) => (
-          <li key={roleIndex} className="flex gap-4 group">
-            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 group-hover:ring-teal-500/20 transition-all">
-              <div className="h-7 w-7 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center">
-                <span className="text-white text-xs font-bold">{role.company.charAt(0)}</span>
-              </div>
-            </div>
-            <dl className="flex flex-auto flex-wrap gap-x-2">
-              <dt className="sr-only">Company</dt>
-              <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                {role.company}
-              </dd>
-              <dt className="sr-only">Role</dt>
-              <dd className="text-xs text-zinc-500 dark:text-zinc-400">
-                {role.title}
-              </dd>
-              <dt className="sr-only">Date</dt>
-              <dd
-                className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-                aria-label={`${role.start} until ${role.end}`}
+      <Container className="relative grid items-center gap-12 pt-12 pb-16 sm:pt-20 lg:grid-cols-[1.35fr_1fr] lg:gap-16 lg:pb-24">
+        <div className="rise">
+          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface py-1 pr-3 pl-2 text-xs sm:text-sm">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-brand" />
+            </span>
+            {profile.availability}
+          </p>
+          <h1 className="mt-7 text-display font-semibold">
+            Kelly
+            <br />
+            Buabeng<span className="text-brand">.</span>
+          </h1>
+          <p className="mt-6 flex flex-wrap gap-x-3 gap-y-1 font-mono text-sm text-muted">
+            {profile.roles.map((r, i) => (
+              <span key={r} className="flex items-center gap-3">
+                {i > 0 && <span className="h-1 w-1 rounded-full bg-gold" aria-hidden="true" />}
+                {r}
+              </span>
+            ))}
+          </p>
+          <p className="mt-6 max-w-xl text-xl leading-snug text-balance sm:text-2xl">{profile.headline}</p>
+          <p className="mt-4 max-w-xl text-muted">{profile.summary}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Button href="/#work">
+              See my work <ArrowRightIcon className="h-4 w-4" />
+            </Button>
+            <Button href={profile.cv} variant="outline" target="_blank">
+              Download CV <DownloadIcon className="h-4 w-4" />
+            </Button>
+            <div className="ml-1 flex items-center gap-1">
+              <a
+                href={profile.github}
+                aria-label="GitHub"
+                className="grid h-11 w-11 place-items-center rounded-full text-muted transition hover:bg-surface-2 hover:text-ink"
               >
-                <time dateTime={role.start}>{role.start}</time>{' '}
-                <span aria-hidden="true">—</span>{' '}
-                <time dateTime={role.end}>{role.end}</time>
-              </dd>
-            </dl>
-          </li>
-        ))}
-      </ol>
-      <Link
-        href="/kelly@cv.pdf"
-        className="group mt-6 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-teal-500 px-3 py-2 text-sm font-medium text-white outline-offset-2 transition hover:bg-teal-600 active:bg-teal-600 shadow-sm hover:shadow-md"
-        target="_blank"
-      >
-        Download CV
-        <ArrowDownIcon className="h-4 w-4 stroke-white transition" />
-      </Link>
-    </div>
-  )
-}
-
-function Projects() {
-  const projects = [
-    {
-      name: 'Exoplanet Classification ML Model',
-      description: 'Machine learning model using NASA datasets to identify and classify exoplanets with advanced data processing techniques',
-      link: { href: 'https://github.com/Kelly-Buabeng/NASA-SpaceApps-Hack-ml-exoplanets-Backend-Optimisation', label: 'github.com' },
-      tech: 'FastAPI, Jupyter Notebook, NASA Kepler Dataset, ML',
-    },
-    {
-      name: 'Expert System - Illegal Mining',
-      description: 'AI system using React, Python (Flask), and Prolog to assess pollution risks from illegal mining activities',
-      link: { href: 'https://github.com/Kelly-Buabeng/expert-system--illegal-mining-', label: 'github.com' },
-      tech: 'React, Python, Flask, Prolog',
-    },
-    {
-      name: 'ChatBot Application',
-      description: 'Real-time chatbot with Node.js backend and React frontend integrated with ChatEngine API',
-      link: { href: 'https://github.com/Kelly-Buabeng/ChatBot', label: 'github.com' },
-      tech: 'Node.js, Express, React, Axios',
-    },
-    {
-      name: 'NHIS Redesign Project',
-      description: 'HCI project redesigning Ghana\'s NHIS system for improved user experience and accessibility',
-      link: { href: 'https://github.com/Kelly-Buabeng/DCIT302-HCIPROJECT-myNHISredesign', label: 'github.com' },
-      tech: 'TypeScript, React, UX/UI Design',
-    }
-  ]
-
-  return (
-    <div className="rounded-3xl border border-zinc-100 p-6 dark:border-zinc-700/40 bg-gradient-to-br from-zinc-50 to-white dark:from-zinc-800/50 dark:to-zinc-900/50">
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <WrenchScrewdriverIcon className="h-6 w-6 flex-none text-teal-500 dark:text-teal-400" />
-        <span className="ml-3">Recent Projects</span>
-      </h2>
-      <ol className="mt-6 space-y-4">
-        {projects.map((project, projectIndex) => (
-          <li className="flex gap-4 group" key={projectIndex}>
-            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 group-hover:ring-teal-500/20 transition-all">
-              <div className="h-7 w-7 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center">
-                <span className="text-white text-xs font-bold">{project.name.charAt(0)}</span>
-              </div>
+                <GitHubIcon className="h-5 w-5" />
+              </a>
+              <a
+                href={profile.linkedin}
+                aria-label="LinkedIn"
+                className="grid h-11 w-11 place-items-center rounded-full text-muted transition hover:bg-surface-2 hover:text-ink"
+              >
+                <LinkedInIcon className="h-5 w-5" />
+              </a>
             </div>
-            <dl className="flex flex-auto flex-wrap gap-x-2">
-              <dt className="sr-only">Project</dt>
-              <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                {project.link.href === '#' ? (
-                  <span className="text-zinc-600 dark:text-zinc-400">
-                    {project.name} <span className="text-xs text-zinc-400 dark:text-zinc-500">(Repository coming soon)</span>
-                  </span>
-                ) : (
-                  <Link 
-                    href={project.link.href}
-                    className="hover:text-teal-500 dark:hover:text-teal-400 transition"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {project.name}
-                  </Link>
-                )}
-              </dd>
-              <dt className="sr-only">Description</dt>
-              <dd className="text-xs text-zinc-500 dark:text-zinc-400">
-                {project.description}
-              </dd>
-              <dt className="sr-only">Tech</dt>
-              <dd className="text-xs text-zinc-400 dark:text-zinc-500" aria-label={project.tech}>
-                {project.tech}
-              </dd>
-            </dl>
-          </li>
-        ))}
-      </ol>
-      <Link 
-        href="https://github.com/Kelly-Buabeng?tab=repositories"
-        className="group mt-6 w-full inline-flex items-center justify-center gap-2 rounded-xl border border-teal-500/20 px-3 py-2 text-sm font-medium text-teal-600 dark:text-teal-400 outline-offset-2 transition hover:bg-teal-500/10 hover:border-teal-500/30 shadow-sm"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        View All Projects
-        <ArrowOutIcon className="h-4 w-4 stroke-teal-600 dark:stroke-teal-400 transition" />
-      </Link>
-    </div>
+          </div>
+        </div>
+
+        <div className="rise relative mx-auto w-full max-w-sm lg:max-w-none" style={{ animationDelay: '120ms' }}>
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] border border-line bg-surface-2">
+            <Image
+              src={portrait}
+              alt="Portrait of Kelly Buabeng"
+              priority
+              placeholder="blur"
+              sizes="(min-width: 1024px) 28rem, 24rem"
+              className="h-full w-full object-cover object-[50%_20%]"
+            />
+            <div className="absolute inset-x-3 bottom-3 flex items-center justify-between rounded-xl bg-paper/85 px-3 py-2 font-mono text-xs backdrop-blur">
+              <span className="flex items-center gap-1.5">
+                <PinIcon className="h-3.5 w-3.5 text-brand" />
+                {profile.location}
+              </span>
+              <span className="text-muted">5.6°N 0.19°W</span>
+            </div>
+          </div>
+          <div className="absolute -top-4 -left-4 rotate-[-4deg] rounded-2xl bg-gold px-4 py-3 text-on-gold shadow-lg sm:-left-8">
+            <p className="font-mono text-[0.68rem] uppercase tracking-[0.14em]">NASA Space Apps 2025</p>
+            <p className="text-lg font-semibold leading-tight">Top 2 · Ghana</p>
+          </div>
+        </div>
+      </Container>
+    </section>
   )
 }
 
-function Photos() {
-  let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
+function Highlights() {
+  return (
+    <Container>
+      <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line lg:grid-cols-4">
+        {highlights.map((h) => (
+          <div key={h.label} className="flex flex-col gap-1 bg-surface p-6 sm:p-8">
+            <dt className="order-2 text-sm text-muted">{h.label}</dt>
+            <dd className="order-1 text-4xl font-semibold tracking-tight sm:text-5xl">{h.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </Container>
+  )
+}
+
+function Work() {
+  let featured = projects.filter((p) => p.featured)
+  let [lead, ...rest] = featured
 
   return (
-    <div className="mt-16 sm:mt-20">
-      <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-        {[image1, image2, image3, image4, image5].map((image, imageIndex) => (
-          <div
-            key={image.src}
-            className={clsx(
-              'relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-2xl bg-zinc-100 sm:w-72 sm:rounded-3xl dark:bg-zinc-800',
-              'ring-2 ring-teal-500/10 dark:ring-teal-400/10',
-              'hover:ring-teal-500/30 dark:hover:ring-teal-400/30 transition-all duration-300',
-              'hover:scale-105',
-              rotations[imageIndex % rotations.length],
-            )}
+    <Container id="work" className="scroll-mt-20 pt-28">
+      <SectionHeading
+        index="01"
+        eyebrow="Selected work"
+        title="Systems that see, decide and serve."
+        lead="Computer vision in production, ML that placed nationally, and agents that act on their own — mostly Python, always with an API in front."
+        action={
+          <Button href="/projects" variant="outline" size="sm">
+            All {projects.length} projects <ArrowRightIcon className="h-4 w-4" />
+          </Button>
+        }
+      />
+      <div className="mt-12 grid gap-5 md:grid-cols-2">
+        <ProjectCard project={lead} large className="md:col-span-2" />
+        {rest.map((p) => (
+          <ProjectCard key={p.slug} project={p} />
+        ))}
+      </div>
+    </Container>
+  )
+}
+
+function Experience() {
+  return (
+    <Container id="experience" className="scroll-mt-20 pt-28">
+      <SectionHeading
+        index="02"
+        eyebrow="Experience"
+        title="Four internships across software, infrastructure and security."
+        action={
+          <Button href={profile.cv} variant="outline" size="sm" target="_blank">
+            Full CV <DownloadIcon className="h-4 w-4" />
+          </Button>
+        }
+      />
+      <ol className="mt-12 border-t border-line">
+        {experience.map((job) => (
+          <li
+            key={job.company}
+            className="grid gap-4 border-b border-line py-8 md:grid-cols-[12rem_1fr] md:gap-10"
           >
-            <Image
-              src={image}
-              alt=""
-              sizes="(min-width: 640px) 18rem, 11rem"
-              className={
-                clsx(
-                  "absolute inset-0 h-full w-full object-cover",
-                  image === image4 && "object-center"
-                )
-              }
-            />
+            <p className="font-mono text-sm text-muted">
+              <time>{job.start}</time> — <time>{job.end}</time>
+            </p>
+            <div>
+              <h3 className="text-xl font-semibold tracking-tight">
+                {job.role} <span className="text-muted">· {job.company}</span>
+              </h3>
+              <ul className="mt-4 grid gap-2 text-[0.95rem] lg:grid-cols-2 lg:gap-x-8">
+                {job.points.map((pt) => (
+                  <li key={pt} className="flex gap-3">
+                    <span className="mt-2.5 h-1.5 w-1.5 flex-none rounded-full bg-brand" aria-hidden="true" />
+                    <span>{pt}</span>
+                  </li>
+                ))}
+              </ul>
+              <ul className="mt-5 flex flex-wrap gap-1.5" aria-label="Focus areas">
+                {job.tags.map((t) => (
+                  <li key={t}>
+                    <Tag>{t}</Tag>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </Container>
+  )
+}
+
+function Skills() {
+  return (
+    <Container id="skills" className="scroll-mt-20 pt-28">
+      <SectionHeading index="03" eyebrow="Toolkit" title="What I reach for." />
+      <div className="mt-12 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        {skills.map((s) => (
+          <div key={s.group} className="bg-surface p-6">
+            <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-muted">{s.group}</h3>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {s.items.map((item) => (
+                <li key={item} className="rounded-lg bg-surface-2 px-2.5 py-1 text-sm">
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
-    </div>
+    </Container>
+  )
+}
+
+function Recognition() {
+  return (
+    <Container id="recognition" className="scroll-mt-20 pt-28">
+      <SectionHeading index="04" eyebrow="Recognition & learning" title="Proof, not just claims." />
+      <div className="mt-12 grid gap-5 lg:grid-cols-[1.2fr_1fr]">
+        <figure className="overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
+          <Image
+            src={nasaCertificate}
+            alt="NASA International Space Apps Challenge 2025 Galactic Problem Solver certificate awarded to Kelly Buabeng"
+            placeholder="blur"
+            sizes="(min-width: 1024px) 36rem, 100vw"
+            className="w-full"
+          />
+          <figcaption className="flex flex-col gap-4 p-6 sm:p-7">
+            {achievements.map((a) => (
+              <div key={a.title}>
+                <p className="flex flex-wrap items-baseline justify-between gap-2">
+                  <span className="font-semibold">{a.title}</span>
+                  <span className="font-mono text-xs text-muted">{a.date}</span>
+                </p>
+                <p className="mt-1 text-sm font-medium text-brand">{a.result}</p>
+                <p className="mt-1 text-sm text-muted">{a.text}</p>
+              </div>
+            ))}
+          </figcaption>
+        </figure>
+        <div className="flex flex-col gap-5">
+          <div className="rounded-[var(--radius-card)] border border-line bg-surface p-6 sm:p-7">
+            <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-muted">Education</h3>
+            <ul className="mt-5 space-y-5">
+              {education.map((e) => (
+                <li key={e.school}>
+                  <p className="font-semibold">{e.school}</p>
+                  <p className="text-sm text-muted">{e.degree}</p>
+                  <p className="mt-1 font-mono text-xs text-muted">{e.years}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-[var(--radius-card)] border border-line bg-surface p-6 sm:p-7">
+            <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-muted">Certifications</h3>
+            <ul className="mt-5 divide-y divide-line">
+              {certifications.map((c) => (
+                <li key={c.name} className="flex items-baseline justify-between gap-4 py-3 first:pt-0 last:pb-0">
+                  <span>
+                    <span className="font-semibold">{c.name}</span>
+                    <span className="block text-sm text-muted">{c.issuer}</span>
+                  </span>
+                  {c.note && <span className="flex-none font-mono text-xs text-muted">{c.note}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Container>
   )
 }
 
 export default function Home() {
   return (
     <>
-      <Container className="mt-9">
-        <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100 bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-zinc-100 dark:to-zinc-400 bg-clip-text text-transparent">
-            Computer Science Student, Backend Developer, and Cloud Enthusiast
-          </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            I'm Kelly, a Computer Science student in Accra, Ghana, passionate about backend development and cloud computing. I love building scalable solutions and exploring how technology can make complex processes more accessible to everyday users.
-          </p>
-          <div className="mt-6 flex gap-6">
-            <SocialLink
-              href="https://github.com/Kelly-Buabeng"
-              aria-label="Follow on GitHub"
-              icon={GitHubIcon}
-            />
-            <SocialLink
-              href="https://www.linkedin.com/in/kellybuabeng/"
-              aria-label="Follow on LinkedIn"
-              icon={LinkedInIcon}
-            />
-          </div>
-        </div>
-      </Container>
-      <Photos />
-      <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16">
-            <Projects />
-          </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Resume />
-          </div>
-        </div>
-      </Container>
+      <Hero />
+      <Highlights />
+      <Work />
+      <Experience />
+      <Skills />
+      <Recognition />
+      <ContactPanel />
     </>
   )
 }
