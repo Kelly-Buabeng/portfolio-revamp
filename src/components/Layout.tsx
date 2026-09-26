@@ -3,17 +3,18 @@ import { Header } from '@/components/Header'
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <div className="fixed inset-0 flex justify-center sm:px-8">
-        <div className="flex w-full max-w-7xl lg:px-8">
-          <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
-        </div>
-      </div>
-      <div className="relative flex w-full flex-col">
-        <Header />
-        <main className="flex-auto">{children}</main>
-        <Footer />
-      </div>
-    </>
+    <div className="flex min-h-full w-full flex-col">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-brand focus:px-3 focus:py-2 focus:text-on-brand"
+      >
+        Skip to content
+      </a>
+      <Header />
+      <main id="main" className="flex-auto">
+        {children}
+      </main>
+      <Footer />
+    </div>
   )
 }

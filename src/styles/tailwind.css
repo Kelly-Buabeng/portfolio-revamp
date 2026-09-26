@@ -1,34 +1,116 @@
 @import 'tailwindcss';
 
-@plugin '@tailwindcss/typography';
-
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Design tokens — mirrored in the "Kelly Buabeng Portfolio" design system. */
+:root {
+  --paper: #f4f2ec;
+  --surface: #ffffff;
+  --surface-2: #e9e6de;
+  --line: #d6d2c7;
+  --ink: #121614;
+  --muted: #545b57;
+  --brand: #0a6b4d;
+  --brand-soft: #d5ebe0;
+  --on-brand: #ffffff;
+  --gold: #e8a80c;
+  --on-gold: #121614;
+  --signal: #c23a2f;
+  --focus: #0a6b4d;
+}
+
+.dark {
+  --paper: #0c0f0e;
+  --surface: #141917;
+  --surface-2: #1c2320;
+  --line: #2b3431;
+  --ink: #eef1ec;
+  --muted: #9ba5a0;
+  --brand: #3fd08f;
+  --brand-soft: #173127;
+  --on-brand: #04140d;
+  --gold: #f4c542;
+  --on-gold: #121614;
+  --signal: #ff6f61;
+  --focus: #3fd08f;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-on-brand: var(--on-brand);
+  --color-gold: var(--gold);
+  --color-on-gold: var(--on-gold);
+  --color-signal: var(--signal);
+
+  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, 'SFMono-Regular', monospace;
+}
+
 @theme {
-  --text-xs: 0.8125rem;
-  --text-xs--line-height: 1.5rem;
-  --text-sm: 0.875rem;
-  --text-sm--line-height: 1.5rem;
-  --text-base: 1rem;
-  --text-base--line-height: 1.75rem;
-  --text-lg: 1.125rem;
-  --text-lg--line-height: 1.75rem;
-  --text-xl: 1.25rem;
-  --text-xl--line-height: 2rem;
-  --text-2xl: 1.5rem;
-  --text-2xl--line-height: 2rem;
-  --text-3xl: 1.875rem;
-  --text-3xl--line-height: 2.25rem;
-  --text-4xl: 2rem;
-  --text-4xl--line-height: 2.5rem;
-  --text-5xl: 3rem;
-  --text-5xl--line-height: 3.5rem;
-  --text-6xl: 3.75rem;
-  --text-6xl--line-height: 1;
-  --text-7xl: 4.5rem;
-  --text-7xl--line-height: 1;
-  --text-8xl: 6rem;
-  --text-8xl--line-height: 1;
-  --text-9xl: 8rem;
-  --text-9xl--line-height: 1;
+  --text-display: clamp(2.75rem, 7vw, 5.5rem);
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.035em;
+  --radius-card: 1.25rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-feature-settings: 'ss01', 'ss02';
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--on-gold);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Dot grid used behind the hero */
+.dot-grid {
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }

@@ -1,106 +1,155 @@
 import { type Metadata } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
+import Image, { type StaticImageData } from 'next/image'
 import clsx from 'clsx'
 
+import { ContactPanel } from '@/components/ContactPanel'
 import { Container } from '@/components/Container'
-import {
-  GitHubIcon,
-  InstagramIcon,
-  LinkedInIcon,
-  XIcon,
-} from '@/components/SocialIcons'
-import portraitImage from '@/images/lilme.jpeg'
-
-function SocialLink({
-  className,
-  href,
-  children,
-  icon: Icon,
-}: {
-  className?: string
-  href: string
-  icon: React.ComponentType<{ className?: string }>
-  children: React.ReactNode
-}) {
-  return (
-    <li className={clsx(className, 'flex')}>
-      <Link
-        href={href}
-        className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
-      >
-        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
-        <span className="ml-4">{children}</span>
-      </Link>
-    </li>
-  )
-}
-
-function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        fillRule="evenodd"
-        d="M6 5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6Zm.245 2.187a.75.75 0 0 0-.99 1.126l6.25 5.5a.75.75 0 0 0 .99 0l6.25-5.5a.75.75 0 0 0-.99-1.126L12 12.251 6.245 7.187Z"
-      />
-    </svg>
-  )
-}
+import { DownloadIcon } from '@/components/Icons'
+import { Button } from '@/components/ui/Button'
+import { Eyebrow } from '@/components/ui/SectionHeading'
+import { Tag } from '@/components/ui/Tag'
+import { profile } from '@/lib/data'
+import campus from '@/images/gallery/campus.jpg'
+import concert from '@/images/gallery/concert.jpg'
+import culture from '@/images/gallery/culture.jpg'
+import family from '@/images/gallery/family.jpg'
+import mumAndMe from '@/images/gallery/mum-and-me.jpg'
+import nightOut from '@/images/gallery/night-out.jpg'
+import portrait from '@/images/portrait.jpg'
 
 export const metadata: Metadata = {
   title: 'About',
   description:
-    "I'm Kelly Buabeng, a Computer Science student in Accra, Ghana. I'm passionate about backend development, cloud computing, and building scalable solutions.",
+    'About Kelly Buabeng — a Computer Science with Statistics student at the University of Ghana working across backend engineering, machine learning and cybersecurity.',
+  alternates: { canonical: '/about' },
 }
+
+const principles = [
+  {
+    title: 'Secure by default',
+    text: 'Time in aviation and energy IT taught me that uptime and security are features, not afterthoughts.',
+  },
+  {
+    title: 'Measure, then optimise',
+    text: 'Whether it’s a slow SQL query or DNS latency, I profile first and let the numbers pick the fix.',
+  },
+  {
+    title: 'Local problems, real data',
+    text: 'Potholes, dumsor, galamsey — I like building for the challenges people around me actually face.',
+  },
+]
+
+const gallery: { src: StaticImageData; alt: string; className?: string }[] = [
+  { src: campus, alt: 'Walking along a tree-lined road on campus', className: 'row-span-2' },
+  { src: mumAndMe, alt: 'Childhood photo: baby Kelly with mum' },
+  { src: concert, alt: 'Crowd at a concert with a neon stage set', className: 'row-span-2' },
+  { src: family, alt: 'Family photo from childhood' },
+  { src: culture, alt: 'Outdoor cultural event under a draped canopy', className: 'md:row-span-2' },
+  { src: nightOut, alt: 'A warm-lit evening out with friends' },
+]
 
 export default function About() {
   return (
-    <Container className="mt-16 sm:mt-32">
-      <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
-        <div className="lg:pl-20">
-          <div className="max-w-sm px-2.5 lg:max-w-none">
+    <>
+      <Container className="grid gap-12 pt-16 sm:pt-24 lg:grid-cols-[1fr_22rem] lg:gap-20">
+        <div>
+          <Eyebrow>About</Eyebrow>
+          <h1 className="mt-5 text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
+            Curious about how things work — then building my own.
+          </h1>
+          <div className="mt-8 max-w-2xl space-y-5 text-lg text-muted">
+            <p>
+              I’m Kelly, a final-year Computer Science with Statistics student at the University of Ghana, living in
+              Accra. I started by taking things apart to see how they worked; programming let me put them back together
+              as tools that actually help.
+            </p>
+            <p>
+              Most of my work lives on the backend: Python services, REST APIs and the databases underneath them. The
+              statistics half of my degree pulled me into data science and machine learning, and internships at
+              TotalEnergies and the Ghana Civil Aviation Authority grounded me in infrastructure and security.
+            </p>
+            <p>
+              Right now I’m finishing a YOLOv8 pothole-detection system for Ghana’s roads, studying applied data science
+              with WorldQuant University, and looking for a team where I can build secure, scalable, data-driven
+              products.
+            </p>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href={profile.cv} target="_blank">
+              Download CV <DownloadIcon className="h-4 w-4" />
+            </Button>
+            <Button href="/projects" variant="outline">
+              Browse projects
+            </Button>
+          </div>
+        </div>
+        <aside className="lg:pt-10">
+          <div className="overflow-hidden rounded-[1.75rem] border border-line">
             <Image
-              src={portraitImage}
-              alt=""
-              sizes="(min-width: 1024px) 36rem, 24rem"
-              className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover object-top dark:bg-zinc-800"
+              src={portrait}
+              alt="Portrait of Kelly Buabeng"
+              placeholder="blur"
+              sizes="22rem"
+              className="aspect-[4/5] w-full object-cover object-[50%_20%]"
             />
           </div>
-        </div>
-        <div className="lg:order-first lg:row-span-2">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            I'm Kelly Buabeng. <br/> I live in Accra, Ghana, where I'm studying Computer Science and building my skills in software development.
-          </h1>
-          <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
-            <p>
-              I've always been curious about how technology works — breaking things down, experimenting, and eventually realizing I could create my own solutions. That curiosity drew me into programming, where I get to combine problem-solving with creativity to build tools that actually make a difference.
-            </p>
-            <p>
-              Over time, I've worked on projects ranging from small applications to more complex systems, with a focus on Python and backend development. I'm also exploring cloud computing and modern infrastructure, aiming to build applications that are not only functional but scalable and reliable.
-            </p>
-            <p>
-              Right now, I'm sharpening my expertise in cloud technologies and backend engineering, while pursuing opportunities to contribute to impactful projects. I'm especially interested in work that simplifies complex processes and makes technology more accessible to everyday users.
-            </p>
+          <dl className="mt-6 space-y-4 text-sm">
+            {[
+              ['Based in', profile.location],
+              ['Studying', 'BSc Computer Science with Statistics, University of Ghana'],
+              ['Speaks', profile.languages.join(', ')],
+            ].map(([k, v]) => (
+              <div key={k} className="flex justify-between gap-6 border-b border-line pb-4">
+                <dt className="font-mono text-xs uppercase tracking-[0.14em] text-muted">{k}</dt>
+                <dd className="text-right">{v}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="mt-6 flex flex-wrap gap-1.5">
+            {['Backend', 'ML & CV', 'Cybersecurity', 'Data Science'].map((t) => (
+              <Tag key={t} tone="brand">
+                {t}
+              </Tag>
+            ))}
           </div>
+        </aside>
+      </Container>
+
+      <Container className="pt-28">
+        <Eyebrow index="→">How I work</Eyebrow>
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {principles.map((p, i) => (
+            <div key={p.title} className="rounded-[var(--radius-card)] border border-line bg-surface p-7">
+              <p className="font-mono text-sm text-brand">0{i + 1}</p>
+              <h2 className="mt-6 text-xl font-semibold tracking-tight">{p.title}</h2>
+              <p className="mt-2 text-muted">{p.text}</p>
+            </div>
+          ))}
         </div>
-        <div className="lg:pl-20">
-          <ul role="list">
-            <SocialLink href="https://github.com/Kelly-Buabeng" icon={GitHubIcon} className="mt-4">
-              Follow on GitHub
-            </SocialLink>
-            <SocialLink href="https://www.linkedin.com/in/kellybuabeng/" icon={LinkedInIcon} className="mt-4">
-              Follow on LinkedIn
-            </SocialLink>
-            <SocialLink
-              href="mailto:buabengkelly@gmail.com"
-              icon={MailIcon}
-              className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
-            >
-              buabengkelly@gmail.com / kbbuabeng002@st.ug.edu.gh
-            </SocialLink>
-          </ul>
+      </Container>
+
+      <Container className="pt-28">
+        <Eyebrow index="→">Away from the keyboard</Eyebrow>
+        <h2 className="mt-5 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">
+          Family, campus walks, live music and Accra nights.
+        </h2>
+        <div className="mt-10 grid grid-flow-dense auto-rows-[9rem] grid-cols-2 gap-3 sm:auto-rows-[12rem] md:grid-cols-3">
+          {gallery.map((g) => (
+            <div key={g.alt} className={clsx('relative overflow-hidden rounded-2xl bg-surface-2', g.className)}>
+              <Image
+                src={g.src}
+                alt={g.alt}
+                placeholder="blur"
+                fill
+                sizes="(min-width: 768px) 22rem, 50vw"
+                className="object-cover transition duration-500 hover:scale-105"
+              />
+            </div>
+          ))}
         </div>
-      </div>
-    </Container>
+      </Container>
+
+      <ContactPanel />
+    </>
   )
 }
